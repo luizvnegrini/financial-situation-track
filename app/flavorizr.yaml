@@ -1,0 +1,22 @@
+flavors:
+  dev:
+    app:
+      name: "Financial Situation Track dev"
+    android:
+      applicationId: "com.financialsituationtrack.dev"
+    ios:
+      bundleId: "com.financialsituationtrack.dev"
+  hml:
+    app:
+      name: "My Current Weather hml"
+    android:
+      applicationId: "com.financialsituationtrack.hml"
+    ios:
+      bundleId: "com.financialsituationtrack.hml"
+  prod:
+    app:
+      name: "My Current Weather prod"
+    android:
+      applicationId: "com.financialsituationtrack.prod"
+    ios:
+      bundleId: "com.financialsituationtrack.prod"

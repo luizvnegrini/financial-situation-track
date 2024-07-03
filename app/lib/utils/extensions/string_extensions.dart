@@ -1,5 +1,6 @@
 extension StringExtensions on String {
   num get asNum {
-    return num.parse(this);
+    final value = replaceAll(',', '').replaceAll('.', '');
+    return num.parse(value);
   }
 }

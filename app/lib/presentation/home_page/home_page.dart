@@ -1,5 +1,6 @@
 import 'package:design_system/design_system.dart';
 import 'package:external_dependencies/external_dependencies.dart';
+import 'package:financial_situation_track/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/core.dart';
@@ -119,10 +120,7 @@ class HomePage extends HookConsumerWidget {
       return 'Please enter a number';
     }
 
-    value = value.replaceAll(',', '').replaceAll('.', '');
-
-    final number = num.tryParse(value);
-    if (number == null || number <= 0) {
+    if (value.asNum <= 0) {
       return 'Please enter a number greater than zero';
     }
 

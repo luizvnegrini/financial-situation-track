@@ -1,3 +1,4 @@
+import 'package:design_system/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -20,7 +21,10 @@ class MoneyTextFormField extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       keyboardType: TextInputType.number,
       controller: controller,
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+        CurrencyInputFormatter(),
+      ],
       validator: validator,
       decoration: const InputDecoration(
         hintText: '00,00',

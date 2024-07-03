@@ -7,7 +7,11 @@ environment:
   sdk: ">=3.4.3 <4.0.0"
 
 dependencies:
+  external_dependencies:
+    path: ../packages/external_dependencies
   flutter:
+    sdk: flutter
+  flutter_localizations:
     sdk: flutter
   cupertino_icons: ^1.0.6
 

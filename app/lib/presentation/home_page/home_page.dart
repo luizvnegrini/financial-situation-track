@@ -43,6 +43,8 @@ class HomePage extends HookConsumerWidget {
                 key: _formKey,
                 child: Column(
                   children: [
+                    ///TODO: improve UI doing transaction between textformfields
+                    ///when user click in "done"
                     MoneyTextFormField(
                       autofocus: true,
                       controller: annualIncomingController,

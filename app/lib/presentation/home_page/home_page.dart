@@ -73,9 +73,11 @@ class HomePage extends HookConsumerWidget {
   }
 
   void _verifyResultAndNavigate(BuildContext context, ScoreResult? result) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (result != null) context.go(Routes.result, extra: result);
-    });
+    if (result != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.go(Routes.result, extra: result);
+      });
+    }
   }
 
   void _configureValidatorsListeners(

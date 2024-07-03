@@ -2,7 +2,9 @@ import 'package:design_system/design_system.dart';
 import 'package:external_dependencies/external_dependencies.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/core.dart';
 import 'home_page_providers.dart';
+import 'home_page_state.dart';
 
 class HomePage extends HookConsumerWidget {
   HomePage({super.key});
@@ -14,10 +16,12 @@ class HomePage extends HookConsumerWidget {
     return HookConsumer(
       builder: (_, ref, __) {
         Widget? loadingWidget;
+        final vm = readHomeViewModel(ref);
         final annualIncomingController = useTextEditingController();
         final monthlyCostsIncomingController = useTextEditingController();
         final state = useHomeState(ref);
         final isFormValid = useState(false);
+
         _configureValidatorsListeners(
           annualIncomingController,
           monthlyCostsIncomingController,
@@ -50,7 +54,10 @@ class HomePage extends HookConsumerWidget {
                       enabled: isFormValid.value,
                       onPressed: () {
                         if (_formKey.currentState?.validate() == true) {
-                          ///TODO: call vm and calculate
+                          vm.getScore(
+                            annualIncome: annualIncomingController.text,
+                            monthlyCosts: monthlyCostsIncomingController.text,
+                          );
                         }
                       },
                       child: const Text('Continue'),
@@ -61,6 +68,18 @@ class HomePage extends HookConsumerWidget {
         );
       },
     );
+  }
+
+  void _listenResultAndNavigate(
+    BuildContext context,
+    IHomePageState state,
+  ) {
+    useEffect(() {
+      if (state.result != null) {
+        context.go(Routes.result, extra: state.result);
+      }
+      return null;
+    }, [state.result]);
   }
 
   void _configureValidatorsListeners(
@@ -99,10 +118,14 @@ class HomePage extends HookConsumerWidget {
     if (value == null || value.isEmpty) {
       return 'Please enter a number';
     }
-    final number = int.tryParse(value);
+
+    value = value.replaceAll(',', '').replaceAll('.', '');
+
+    final number = num.tryParse(value);
     if (number == null || number <= 0) {
       return 'Please enter a number greater than zero';
     }
+
     return null;
   }
 }

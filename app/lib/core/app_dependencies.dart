@@ -1,9 +1,22 @@
-abstract class IAppDependencies {}
+import '../domain/domain.dart';
 
-class AppDependencies implements IAppDependencies {
-  AppDependencies();
+abstract class AppDependencies {
+  //usecases
+  abstract final CalculateScore calculateScore;
+}
 
-  static Future<IAppDependencies> load() async {
-    return AppDependencies();
+class AppDependenciesImpl implements AppDependencies {
+  //usecases
+  @override
+  final CalculateScore calculateScore;
+
+  AppDependenciesImpl({
+    required this.calculateScore,
+  });
+
+  static Future<AppDependencies> load() async {
+    return AppDependenciesImpl(
+      calculateScore: CalculateScoreImpl(),
+    );
   }
 }

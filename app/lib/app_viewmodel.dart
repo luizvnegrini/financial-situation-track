@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'app_state.dart';
 import 'core/core.dart';
 
-abstract class IAppViewModel extends ValueNotifier<AsyncValue<IAppState>> {
+abstract class IAppViewModel extends ValueNotifier<AsyncValue<AppState>> {
   IAppViewModel(super.value);
 
   Future<void> loadDependencies();
@@ -27,11 +27,11 @@ class AppViewModel extends IAppViewModel {
 
     final futureResults = await Future.wait<dynamic>([
       splashMinDuration,
-      AppDependencies.load(),
+      AppDependenciesImpl.load(),
     ]);
 
     value = AsyncValue.data(
-      AppState(
+      AppStateImpl(
         appDependencies: futureResults[1],
       ),
     );

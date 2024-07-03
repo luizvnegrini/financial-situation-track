@@ -33,7 +33,7 @@ class _App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      ValueListenableBuilder<AsyncValue<IAppState>>(
+      ValueListenableBuilder<AsyncValue<AppState>>(
         valueListenable: viewModel,
         builder: (_, value, __) => value.maybeWhen(
           data: (state) => _loadAppFlow(state),
@@ -41,9 +41,11 @@ class _App extends StatelessWidget {
         ),
       );
 
-  ProviderScope _loadAppFlow(IAppState state) {
+  ProviderScope _loadAppFlow(AppState state) {
     return ProviderScope(
-      overrides: const [],
+      overrides: [
+        calculateScore.overrideWithValue(state.appDependencies.calculateScore),
+      ],
       child: AppLoadedRoot(appTitle: appTitle),
     );
   }

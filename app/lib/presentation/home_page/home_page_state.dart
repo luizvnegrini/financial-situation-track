@@ -14,7 +14,7 @@ abstract class IHomePageState extends ViewModelState {
 
 class HomePageState extends IHomePageState {
   const HomePageState({
-    this.isLoading = true,
+    this.isLoading = false,
     this.errorMessage = '',
   });
 

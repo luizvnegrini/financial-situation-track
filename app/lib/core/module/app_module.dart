@@ -13,7 +13,7 @@ class AppModule {
         GoRoute(
           name: 'home',
           path: Routes.home,
-          builder: (context, state) => const HomePage(),
+          builder: (context, state) => HomePage(),
         ),
         GoRoute(
           name: 'result',

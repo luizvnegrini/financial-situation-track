@@ -4,8 +4,8 @@ import 'package:financial_situation_track/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/core.dart';
+import '../../domain/domain.dart';
 import 'home_page_providers.dart';
-import 'home_page_state.dart';
 
 class HomePage extends HookConsumerWidget {
   HomePage({super.key});
@@ -23,6 +23,7 @@ class HomePage extends HookConsumerWidget {
         final state = useHomeState(ref);
         final isFormValid = useState(false);
 
+        _verifyResultAndNavigate(context, state.result);
         _configureValidatorsListeners(
           annualIncomingController,
           monthlyCostsIncomingController,
@@ -71,16 +72,10 @@ class HomePage extends HookConsumerWidget {
     );
   }
 
-  void _listenResultAndNavigate(
-    BuildContext context,
-    IHomePageState state,
-  ) {
-    useEffect(() {
-      if (state.result != null) {
-        context.go(Routes.result, extra: state.result);
-      }
-      return null;
-    }, [state.result]);
+  void _verifyResultAndNavigate(BuildContext context, ScoreResult? result) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (result != null) context.go(Routes.result, extra: result);
+    });
   }
 
   void _configureValidatorsListeners(

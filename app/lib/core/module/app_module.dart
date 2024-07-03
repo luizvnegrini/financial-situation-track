@@ -5,7 +5,7 @@ import '../../presentation/presentation.dart';
 class Routes {
   static String get _source => '/';
   static String get home => _source;
-  static String get result => '$_source/result';
+  static String get result => '/result';
 }
 
 class AppModule {

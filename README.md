@@ -16,7 +16,7 @@ https://github.com/luizvnegrini/financial-situation-track/assets/44884362/1f6513
 - Calculate financial situation
 
 ## Possible new features
-- SignIn to recover the user data
+- Authentication to recover the data and improve security
 - Persist data and update
 - Persist monthly costs and build a dashboard with a graphic to show results
 - Collect feedback using packages like Intercom

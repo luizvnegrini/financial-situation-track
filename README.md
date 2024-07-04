@@ -3,7 +3,7 @@
 The app empowers users to input their annual income and monthly expenses. Using this data, the app calculates and presents a comprehensive financial health score.
 
 # Demo
-![demo](https://github.com/luizvnegrini/financial-situation-track/assets/44884362/5ac153e6-3197-4116-9d8e-edc6504adf74)
+https://github.com/luizvnegrini/financial-situation-track/assets/44884362/1f651351-f4e8-4cd0-8a0b-7756f95505c3
 
 ## Main Technologies
 - Flutter

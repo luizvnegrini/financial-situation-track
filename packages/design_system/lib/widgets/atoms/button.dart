@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../design_system.dart';
+
 class Button extends StatelessWidget {
   final VoidCallback onPressed;
   final bool enabled;
@@ -24,7 +26,7 @@ class Button extends StatelessWidget {
           foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
           textStyle: const WidgetStatePropertyAll<TextStyle>(
             TextStyle(
-              fontSize: 16,
+              fontSize: kSpacingXXXS,
               fontWeight: FontWeight.w500,
             ),
           ),

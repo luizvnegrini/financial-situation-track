@@ -47,32 +47,32 @@ class HomePage extends HookConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 16),
+                    const VGap.xxxs(),
                     const PageHeaderDescription(
                       text: '''Let's find out your ''',
                       boldText: 'financial wellness score.',
                     ),
-                    const SizedBox(height: 24),
+                    const VGap.xxs(),
                     Card(
                       color: Colors.white,
                       elevation: 5,
                       child: Padding(
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(kSpacingXXXS),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             _Description(),
-                            const SizedBox(height: 16),
+                            const VGap.xxxs(),
                             const Text('Annual income'),
-                            const SizedBox(height: 7),
+                            const VGap.nano(),
                             MoneyTextFormField(
                               autofocus: true,
                               controller: annualIncomingController,
                               validator: _validateInput,
                             ),
-                            const SizedBox(height: 16),
+                            const VGap.xxxs(),
                             const Text('Monthly Costs'),
-                            const SizedBox(height: 7),
+                            const VGap.nano(),
                             MoneyTextFormField(
                               controller: monthlyCostsIncomingController,
                               validator: _validateInput,
@@ -81,7 +81,7 @@ class HomePage extends HookConsumerWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const VGap.xxxs(),
                     Button(
                       enabled: isFormValid.value,
                       onPressed: () {
@@ -94,7 +94,7 @@ class HomePage extends HookConsumerWidget {
                       },
                       child: const Text('Continue'),
                     ),
-                    const SizedBox(height: 36),
+                    const VGap.sm(),
                     const EncryptionDisclaimer(),
                   ],
                 ),
@@ -179,7 +179,7 @@ class _Description extends StatelessWidget {
               package: 'design_system',
               height: 48,
             ),
-            const SizedBox(height: 16),
+            const VGap.xxxs(),
             const Text(
               'Financial wellness test',
               style: TextStyle(

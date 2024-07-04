@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../design_system.dart';
+
 class EncryptionDisclaimer extends StatelessWidget {
   const EncryptionDisclaimer({
     super.key,
@@ -17,7 +19,7 @@ class EncryptionDisclaimer extends StatelessWidget {
             height: 24,
           ),
         ),
-        const SizedBox(height: 16),
+        const VGap.xxxs(),
         const Text(
           '''Your financial information is encrypted and secure. We'll never share or sell any of your personal data.''',
           textAlign: TextAlign.center,

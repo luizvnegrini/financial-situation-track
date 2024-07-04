@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../design_system.dart';
+
 class ProgressBar extends StatefulWidget {
   final Color color;
   final List<AnimatedProgressBarItem> progressBarItems;
@@ -34,7 +36,7 @@ class ProgressBarState extends State<ProgressBar>
     });
 
     return SizedBox(
-      height: 16,
+      height: kSpacingXXXS,
       child: Stack(
         alignment: Alignment.center,
         children: children.reversed.toList(),
@@ -114,7 +116,7 @@ class _AnimatedProgressBarItemState extends State<AnimatedProgressBarItem>
           return Stack(
             children: [
               Container(
-                height: 16,
+                height: kSpacingXXXS,
                 width: width * _animation.value,
                 decoration: decoration.copyWith(color: Colors.grey),
               ),

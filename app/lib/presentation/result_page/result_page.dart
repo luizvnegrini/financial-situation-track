@@ -20,14 +20,14 @@ class ResultPage extends HookConsumerWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 16),
+          const VGap.xxxs(),
           const PageHeaderDescription(
             text: '''Here's your final ''',
             boldText: 'final wellness score.',
           ),
-          const SizedBox(height: 24),
+          const VGap.xxs(),
           _Card(uiModel: uiModel),
-          const SizedBox(height: 36),
+          const VGap.sm(),
           const EncryptionDisclaimer(),
         ],
       ),
@@ -53,7 +53,7 @@ class _Card extends StatelessWidget {
         elevation: 5,
         color: Colors.white,
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(kSpacingXXXS),
           child: Column(
             children: [
               Image.asset(
@@ -61,7 +61,7 @@ class _Card extends StatelessWidget {
                 package: 'design_system',
                 height: 48,
               ),
-              const SizedBox(height: 24),
+              const VGap.quarck(),
               ProgressBar(
                 color: uiModel.progressBarColor,
                 progressBarItems: [
@@ -86,7 +86,7 @@ class _Card extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 24),
+              const VGap.xxs(),
               Text(
                 uiModel.title,
                 style: const TextStyle(
@@ -94,7 +94,7 @@ class _Card extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: 4),
+              const VGap.quarck(),
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
@@ -114,7 +114,7 @@ class _Card extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 32),
+              const VGap.xs(),
               Button.light(
                 onPressed: context.pop,
                 enabled: true,

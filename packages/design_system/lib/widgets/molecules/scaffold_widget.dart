@@ -1,6 +1,8 @@
 import 'package:external_dependencies/external_dependencies.dart';
 import 'package:flutter/material.dart';
 
+import '../../design_system.dart';
+
 class ScaffoldWidget extends StatelessWidget {
   final Widget? body;
   final Widget? bottomNavigationBar;
@@ -27,7 +29,7 @@ class ScaffoldWidget extends StatelessWidget {
         ),
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(kSpacingXXXS),
             child: body,
           ),
         ),

@@ -3,12 +3,12 @@
 The app empowers users to input their annual income and monthly expenses. Using this data, the app calculates and presents a comprehensive financial health score.
 
 # Demo
-![](https://github.com/financial-situation-track/demo.gif)
+![demo](https://github.com/luizvnegrini/financial-situation-track/assets/44884362/5ac153e6-3197-4116-9d8e-edc6504adf74)
 
 ## Main Technologies
 - Flutter
 - Riverpod
-- flutter_hooks
+- Flutter Hooks
 - Mocktail
 
 ## Features

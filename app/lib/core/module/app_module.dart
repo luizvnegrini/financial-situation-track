@@ -1,5 +1,6 @@
 import 'package:external_dependencies/external_dependencies.dart';
 
+import '../../domain/domain.dart';
 import '../../presentation/presentation.dart';
 
 class Routes {
@@ -18,7 +19,10 @@ class AppModule {
         GoRoute(
           name: 'result',
           path: Routes.result,
-          builder: (context, state) => const ResultPage(),
+          builder: (context, state) {
+            final result = state.extra as ScoreResult;
+            return ResultPage(result: result);
+          },
         ),
       ];
 }

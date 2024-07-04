@@ -17,7 +17,9 @@ class ScaffoldWidget extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: backgroundColor,
         appBar: AppBar(
-          backgroundColor: backgroundColor,
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          automaticallyImplyLeading: false,
           title: SvgPicture.asset(
             'assets/images/logo.svg',
             package: 'design_system',

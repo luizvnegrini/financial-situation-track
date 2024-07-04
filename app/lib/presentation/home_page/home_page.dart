@@ -23,7 +23,6 @@ class HomePage extends HookConsumerWidget {
         final state = useHomeState(ref);
         final isFormValid = useState(false);
 
-        _verifyResultAndNavigate(context, state.result);
         _configureValidatorsListeners(
           annualIncomingController,
           monthlyCostsIncomingController,
@@ -42,6 +41,7 @@ class HomePage extends HookConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const SizedBox(height: 16),
                     const PageHeaderDescription(
                       text: '''Let's find out your ''',
                       boldText: 'financial wellness score.',
@@ -49,7 +49,7 @@ class HomePage extends HookConsumerWidget {
                     const SizedBox(height: 24),
                     Card(
                       color: Colors.white,
-                      elevation: 4,
+                      elevation: 5,
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: Column(
@@ -83,10 +83,18 @@ class HomePage extends HookConsumerWidget {
                       enabled: isFormValid.value,
                       onPressed: () {
                         if (_formKey.currentState?.validate() == true) {
-                          vm.getScore(
-                            annualIncome: annualIncomingController.text,
-                            monthlyCosts: monthlyCostsIncomingController.text,
-                          );
+                          vm
+                              .getScore(
+                                annualIncome: annualIncomingController.text,
+                                monthlyCosts:
+                                    monthlyCostsIncomingController.text,
+                              )
+                              .then(
+                                (_) => _verifyResultAndNavigate(
+                                  context,
+                                  state.result,
+                                ),
+                              );
                         }
                       },
                       child: const Text('Continue'),

@@ -1,17 +1,24 @@
 import 'package:external_dependencies/external_dependencies.dart';
 
+import '../../domain/domain.dart';
 import '../base/viewmodel.dart';
 import 'result_page_state.dart';
 
-final resultPageViewModel =
-    StateNotifierProvider.autoDispose<IResultPageViewModel, IResultPageState>(
-  (ref) => ResultPageViewModel(),
+final resultPageViewModel = StateNotifierProvider.family
+    .autoDispose<ResultPageViewModel, ResultPageState, ScoreResult>(
+  (ref, result) => ResultPageViewModelImpl(
+    result: result,
+  ),
 );
 
-abstract class IResultPageViewModel extends ViewModel<IResultPageState> {
-  IResultPageViewModel(super.state);
+abstract class ResultPageViewModel extends ViewModel<ResultPageState> {
+  ResultPageViewModel(super.state);
 }
 
-class ResultPageViewModel extends IResultPageViewModel {
-  ResultPageViewModel() : super(ResultPageState.initial());
+class ResultPageViewModelImpl extends ResultPageViewModel {
+  ResultPageViewModelImpl({
+    required ScoreResult result,
+  }) : super(ResultPageStateImpl.initial(
+          result: result,
+        ));
 }

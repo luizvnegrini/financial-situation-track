@@ -1,35 +1,41 @@
+import '../../domain/domain.dart';
 import '../base/viewmodel.dart';
 
-abstract class IResultPageState extends ViewModelState {
-  const IResultPageState();
+abstract class ResultPageState extends ViewModelState {
+  const ResultPageState();
 
-  abstract final bool isLoading;
+  abstract final ScoreResult result;
 
-  IResultPageState copyWith({
-    bool? isLoading,
+  ResultPageState copyWith({
+    ScoreResult? result,
   });
 }
 
-class ResultPageState extends IResultPageState {
-  const ResultPageState({
-    this.isLoading = true,
+class ResultPageStateImpl extends ResultPageState {
+  const ResultPageStateImpl({
+    required this.result,
   });
 
-  factory ResultPageState.initial() => const ResultPageState();
+  factory ResultPageStateImpl.initial({
+    required ScoreResult result,
+  }) =>
+      ResultPageStateImpl(
+        result: result,
+      );
 
   @override
-  final bool isLoading;
+  final ScoreResult result;
 
   @override
   List<Object?> get props => [
-        isLoading,
+        result,
       ];
 
   @override
-  IResultPageState copyWith({
-    isLoading,
+  ResultPageState copyWith({
+    result,
   }) =>
-      ResultPageState(
-        isLoading: isLoading ?? this.isLoading,
+      ResultPageStateImpl(
+        result: result ?? this.result,
       );
 }

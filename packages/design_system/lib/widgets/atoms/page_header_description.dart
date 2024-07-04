@@ -14,23 +14,25 @@ class PageHeaderDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-        text: text,
-        style: TextStyle(
-          color: textColor,
-          fontSize: 18,
-        ),
-        children: <TextSpan>[
-          TextSpan(
-            text: boldText,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: textColor,
-            ),
+    return Center(
+      child: RichText(
+        textAlign: TextAlign.center,
+        text: TextSpan(
+          text: text,
+          style: TextStyle(
+            color: textColor,
+            fontSize: 18,
           ),
-        ],
+          children: <TextSpan>[
+            TextSpan(
+              text: boldText,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: textColor,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

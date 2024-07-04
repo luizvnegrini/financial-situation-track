@@ -13,10 +13,10 @@ class ResultPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     useResultState(ref, result);
-    final uiModel = ResultPageUiModel.getUiData(result);
+    final uiModel = ResultPageUiModel.getUiData(context, result);
 
     return ScaffoldWidget(
-      backgroundColor: const Color.fromRGBO(244, 248, 250, 1),
+      backgroundColor: context.colors.lightGrey,
       body: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
         child: Column(
@@ -45,8 +45,8 @@ class _Card extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const resultLabelColor = Color.fromRGBO(77, 100, 117, 1);
-    const defaultProgressBarItemColor = Color.fromRGBO(244, 248, 250, 1);
+    final defaultProgressBarItemColor = context.colors.lightGrey;
+    final resultLabelColor = context.colors.darkGrey;
     const defaultDuration = Duration(milliseconds: 600);
     const defaultDelay = Duration(milliseconds: 160);
 
@@ -104,7 +104,7 @@ class _Card extends StatelessWidget {
                 textAlign: TextAlign.center,
                 text: TextSpan(
                   text: 'Your financial wellness score is \n',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontFamily: 'Work Sans',
                     package: 'design_system',
                     fontSize: kSpacingXXXS,
@@ -114,7 +114,7 @@ class _Card extends StatelessWidget {
                   children: <TextSpan>[
                     TextSpan(
                       text: uiModel.resultLabel,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: resultLabelColor,
                         height: 2,

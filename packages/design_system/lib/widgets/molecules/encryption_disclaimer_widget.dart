@@ -22,14 +22,14 @@ class EncryptionDisclaimer extends StatelessWidget {
             ),
           ),
           const VGap.xxxs(),
-          const Text(
+          Text(
             '''Your financial information is encrypted and secure. We'll never share or sell any of your personal data.''',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontFamily: 'Work Sans',
               package: 'design_system',
               fontSize: 12,
-              color: Color.fromRGBO(112, 135, 151, 1),
+              color: context.colors.grey,
             ),
           ),
         ],

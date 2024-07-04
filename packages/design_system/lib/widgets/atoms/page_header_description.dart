@@ -1,3 +1,4 @@
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
 class PageHeaderDescription extends StatelessWidget {
@@ -10,10 +11,10 @@ class PageHeaderDescription extends StatelessWidget {
     super.key,
   });
 
-  final textColor = const Color.fromRGBO(0, 28, 149, 1);
-
   @override
   Widget build(BuildContext context) {
+    late final textColor = context.colors.primary;
+
     return Center(
       child: RichText(
         textAlign: TextAlign.center,

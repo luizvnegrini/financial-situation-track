@@ -17,22 +17,21 @@ class MoneyTextFormField extends StatelessWidget {
     this.validator,
   });
 
-  final _textStyle = const TextStyle(
-    color: Color.fromRGBO(77, 100, 117, 1),
-    fontFamily: 'Rubik',
-    package: 'design_system',
-    fontSize: 32,
-    fontWeight: FontWeight.w500,
-  );
-
-  final _defaultBorder = const OutlineInputBorder(
-    borderSide: BorderSide(
-      color: Color.fromRGBO(233, 238, 242, 1),
-    ),
-  );
-
   @override
   Widget build(BuildContext context) {
+    final defaultBorder = OutlineInputBorder(
+      borderSide: BorderSide(
+        color: context.colors.border,
+      ),
+    );
+    final textStyle = TextStyle(
+      color: context.colors.darkGrey,
+      fontFamily: 'Rubik',
+      package: 'design_system',
+      fontSize: 32,
+      fontWeight: FontWeight.w500,
+    );
+
     return SizedBox(
       height: 56,
       child: TextFormField(
@@ -48,12 +47,12 @@ class MoneyTextFormField extends StatelessWidget {
           CurrencyInputFormatter(),
         ],
         validator: validator,
-        style: _textStyle,
+        style: textStyle,
         decoration: InputDecoration(
-          focusedBorder: _defaultBorder,
-          enabledBorder: _defaultBorder,
-          errorBorder: _defaultBorder,
-          hintStyle: _textStyle,
+          focusedBorder: defaultBorder,
+          enabledBorder: defaultBorder,
+          errorBorder: defaultBorder,
+          hintStyle: textStyle,
           hintText: '00,00',
           contentPadding: const EdgeInsets.symmetric(vertical: kSpacingQuarck),
           prefixIcon: Image.asset(

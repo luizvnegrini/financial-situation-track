@@ -225,7 +225,7 @@ class _Description extends StatelessWidget {
               style: style?.copyWith(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: const Color.fromRGBO(30, 42, 50, 1),
+                color: context.colors.secondary,
               ),
             ),
             Text(
@@ -233,12 +233,7 @@ class _Description extends StatelessWidget {
               style: style?.copyWith(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
-                color: const Color.fromRGBO(
-                  112,
-                  135,
-                  151,
-                  1,
-                ),
+                color: context.colors.grey,
               ),
             ),
           ],

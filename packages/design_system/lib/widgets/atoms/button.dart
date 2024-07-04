@@ -1,3 +1,4 @@
+import 'package:design_system/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../design_system.dart';
@@ -20,7 +21,7 @@ class Button extends StatelessWidget {
               if (states.contains(WidgetState.disabled)) {
                 return Colors.grey;
               }
-              return const Color.fromRGBO(0, 28, 149, 1);
+              return ThemeColors().primary;
             },
           ),
           foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
@@ -46,12 +47,12 @@ class Button extends StatelessWidget {
               if (states.contains(WidgetState.disabled)) {
                 return Colors.white;
               }
-              return const Color.fromRGBO(0, 28, 149, 1);
+              return ThemeColors().primary;
             },
           ),
-          side: const WidgetStatePropertyAll(
+          side: WidgetStatePropertyAll(
             BorderSide(
-              color: Color.fromRGBO(0, 28, 149, 1),
+              color: ThemeColors().primary,
               width: 2,
             ),
           ),

@@ -28,8 +28,8 @@ class SplashScreenPage extends HookConsumerWidget {
               ),
             ),
             const VGap.xxs(),
-            const CircularProgressIndicator(
-              color: Color.fromRGBO(0, 28, 149, 1),
+            CircularProgressIndicator(
+              color: context.colors.primary,
             ),
           ],
         ),

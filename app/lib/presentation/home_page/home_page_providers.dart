@@ -6,7 +6,7 @@ import 'package:financial_situation_track/presentation/home_page/home_page_state
 import 'home_page_viewmodel.dart';
 
 //vm's
-IHomePageViewModel readHomeViewModel(WidgetRef ref) =>
+HomePageViewModel readHomeViewModel(WidgetRef ref) =>
     ref.read(homePageViewModel.notifier);
 
 //states

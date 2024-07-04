@@ -7,14 +7,14 @@ import '../presentation.dart';
 import 'home_page_state.dart';
 
 final homePageViewModel =
-    StateNotifierProvider.autoDispose<IHomePageViewModel, HomePageState>(
-  (ref) => HomePageViewModel(
+    StateNotifierProvider.autoDispose<HomePageViewModel, HomePageState>(
+  (ref) => HomePageViewModelImpl(
     calculateScore: ref.read(calculateScore),
   ),
 );
 
-abstract class IHomePageViewModel extends ViewModel<HomePageState> {
-  IHomePageViewModel(super.state);
+abstract class HomePageViewModel extends ViewModel<HomePageState> {
+  HomePageViewModel(super.state);
 
   abstract final CalculateScore calculateScore;
   void clearResult();
@@ -25,11 +25,11 @@ abstract class IHomePageViewModel extends ViewModel<HomePageState> {
   });
 }
 
-class HomePageViewModel extends IHomePageViewModel {
+class HomePageViewModelImpl extends HomePageViewModel {
   @override
   final CalculateScore calculateScore;
 
-  HomePageViewModel({
+  HomePageViewModelImpl({
     required this.calculateScore,
   }) : super(HomePageStateImpl.initial());
 

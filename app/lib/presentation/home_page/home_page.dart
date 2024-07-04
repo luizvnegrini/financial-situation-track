@@ -129,7 +129,7 @@ class HomePage extends HookConsumerWidget {
   }
 
   void _validateForm(
-      IHomePageViewModel vm,
+      HomePageViewModel vm,
       TextEditingController annualIncomingController,
       TextEditingController monthlyCostsIncomingController) {
     if (_formKey.currentState?.validate() == true) {

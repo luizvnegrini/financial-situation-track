@@ -11,7 +11,7 @@ class CalculateScoreImpl implements CalculateScore {
   @override
   Either<Failure, ScoreResult> call(FinancialData data) {
     try {
-      throw Exception();
+      //throw Exception();
 
       late ScoreResult result;
       final annualNetIncome = data.annualIncome - (data.annualIncome * 0.08);

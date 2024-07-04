@@ -5,11 +5,15 @@ import 'package:flutter/services.dart';
 class MoneyTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final FormFieldValidator<String>? validator;
+  final FocusNode? focusNode;
   final bool autofocus;
+  final Function(String?)? onFieldSubmitted;
 
   const MoneyTextFormField({
     super.key,
     required this.controller,
+    this.onFieldSubmitted,
+    this.focusNode,
     this.autofocus = false,
     this.validator,
   });
@@ -32,8 +36,11 @@ class MoneyTextFormField extends StatelessWidget {
       height: 56,
       child: TextFormField(
         autofocus: autofocus,
+        focusNode: focusNode,
+        onFieldSubmitted: onFieldSubmitted,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         keyboardType: TextInputType.number,
+        textInputAction: TextInputAction.next,
         controller: controller,
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,
@@ -44,6 +51,7 @@ class MoneyTextFormField extends StatelessWidget {
         decoration: InputDecoration(
           focusedBorder: _defaultBorder,
           enabledBorder: _defaultBorder,
+          errorBorder: _defaultBorder,
           hintStyle: _textStyle,
           hintText: '00,00',
           prefixIcon: Image.asset(

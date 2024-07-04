@@ -61,7 +61,7 @@ class _Card extends StatelessWidget {
                 package: 'design_system',
                 height: 48,
               ),
-              const VGap.quarck(),
+              const VGap.xxs(),
               ProgressBar(
                 color: uiModel.progressBarColor,
                 progressBarItems: [

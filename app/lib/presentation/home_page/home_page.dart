@@ -1,6 +1,7 @@
 import 'package:design_system/design_system.dart';
 import 'package:external_dependencies/external_dependencies.dart';
 import 'package:financial_situation_track/presentation/home_page/home_page_state.dart';
+import 'package:financial_situation_track/presentation/home_page/home_page_viewmodel.dart';
 import 'package:financial_situation_track/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,8 @@ class HomePage extends HookConsumerWidget {
     Widget? loadingWidget;
     final annualIncomingController = useTextEditingController();
     final monthlyCostsIncomingController = useTextEditingController();
+    final annualIncomingFocusNode = useFocusNode();
+    final monthlyCostsIncomingFocusNode = useFocusNode();
     final isFormValid = useState(false);
 
     return HookConsumer(
@@ -41,67 +44,91 @@ class HomePage extends HookConsumerWidget {
 
         return ScaffoldWidget(
           backgroundColor: Colors.white,
-          body: loadingWidget ??
-              Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const VGap.xxxs(),
-                    const PageHeaderDescription(
-                      text: '''Let's find out your ''',
-                      boldText: 'financial wellness score.',
-                    ),
-                    const VGap.xxs(),
-                    Card(
-                      color: Colors.white,
-                      elevation: 5,
-                      child: Padding(
-                        padding: const EdgeInsets.all(kSpacingXXXS),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _Description(),
-                            const VGap.xxxs(),
-                            const Text('Annual income'),
-                            const VGap.nano(),
-                            MoneyTextFormField(
-                              autofocus: true,
-                              controller: annualIncomingController,
-                              validator: _validateInput,
-                            ),
-                            const VGap.xxxs(),
-                            const Text('Monthly Costs'),
-                            const VGap.nano(),
-                            MoneyTextFormField(
-                              controller: monthlyCostsIncomingController,
-                              validator: _validateInput,
-                            ),
-                          ],
+          body: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            child: loadingWidget ??
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const VGap.xxxs(),
+                      const PageHeaderDescription(
+                        text: '''Let's find out your ''',
+                        boldText: 'financial wellness score.',
+                      ),
+                      const VGap.xxs(),
+                      Card(
+                        color: Colors.white,
+                        elevation: 5,
+                        child: Padding(
+                          padding: const EdgeInsets.all(kSpacingXXXS),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _Description(),
+                              const VGap.xxxs(),
+                              const Text('Annual income'),
+                              const VGap.nano(),
+                              MoneyTextFormField(
+                                focusNode: annualIncomingFocusNode,
+                                autofocus: true,
+                                controller: annualIncomingController,
+                                onFieldSubmitted: (_) {
+                                  FocusScope.of(context).requestFocus(
+                                    monthlyCostsIncomingFocusNode,
+                                  );
+                                },
+                                validator: _validateInput,
+                              ),
+                              const VGap.xxxs(),
+                              const Text('Monthly Costs'),
+                              const VGap.nano(),
+                              MoneyTextFormField(
+                                focusNode: monthlyCostsIncomingFocusNode,
+                                controller: monthlyCostsIncomingController,
+                                onFieldSubmitted: (_) => _validateForm(
+                                  vm,
+                                  annualIncomingController,
+                                  monthlyCostsIncomingController,
+                                ),
+                                validator: _validateInput,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    const VGap.xxxs(),
-                    Button(
-                      enabled: isFormValid.value,
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() == true) {
-                          vm.getScore(
-                            annualIncome: annualIncomingController.text,
-                            monthlyCosts: monthlyCostsIncomingController.text,
-                          );
-                        }
-                      },
-                      child: const Text('Continue'),
-                    ),
-                    const VGap.sm(),
-                    const EncryptionDisclaimer(),
-                  ],
+                      const VGap.xxxs(),
+                      Button(
+                        enabled: isFormValid.value,
+                        onPressed: () => _validateForm(
+                          vm,
+                          annualIncomingController,
+                          monthlyCostsIncomingController,
+                        ),
+                        child: const Text('Continue'),
+                      ),
+                      const VGap.sm(),
+                      const EncryptionDisclaimer(),
+                    ],
+                  ),
                 ),
-              ),
+          ),
         );
       },
     );
+  }
+
+  void _validateForm(
+      IHomePageViewModel vm,
+      TextEditingController annualIncomingController,
+      TextEditingController monthlyCostsIncomingController) {
+    if (_formKey.currentState?.validate() == true) {
+      vm.getScore(
+        annualIncome: annualIncomingController.text,
+        monthlyCosts: monthlyCostsIncomingController.text,
+      );
+    }
   }
 
   void _verifyResultAndNavigate(

@@ -14,9 +14,30 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: enabled ? onPressed : null,
-      child: child,
+    return SizedBox(
+      height: 56,
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: enabled ? onPressed : null,
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.disabled)) {
+                return Colors.grey;
+              }
+              return const Color.fromRGBO(0, 28, 149, 1);
+            },
+          ),
+          foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+          textStyle: const WidgetStatePropertyAll<TextStyle>(
+            TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        child: child,
+      ),
     );
   }
 }

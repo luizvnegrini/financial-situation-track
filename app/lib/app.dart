@@ -69,7 +69,7 @@ class AppLoadedRoot extends HookConsumerWidget {
       scaffoldMessengerKey: useScaffoldMessenger(ref),
       title: appTitle,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
       routerConfig: router,

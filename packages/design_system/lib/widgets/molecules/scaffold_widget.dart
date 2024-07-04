@@ -1,20 +1,28 @@
+import 'package:external_dependencies/external_dependencies.dart';
 import 'package:flutter/material.dart';
 
 class ScaffoldWidget extends StatelessWidget {
-  final PreferredSizeWidget? appBar;
   final Widget? body;
   final Widget? bottomNavigationBar;
+  final Color? backgroundColor;
 
   const ScaffoldWidget({
     this.body,
-    this.appBar,
     this.bottomNavigationBar,
+    this.backgroundColor,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: appBar,
+        backgroundColor: backgroundColor,
+        appBar: AppBar(
+          backgroundColor: backgroundColor,
+          title: SvgPicture.asset(
+            'assets/images/logo.svg',
+            package: 'design_system',
+          ),
+        ),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16),

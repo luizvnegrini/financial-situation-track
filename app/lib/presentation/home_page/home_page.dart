@@ -35,25 +35,50 @@ class HomePage extends HookConsumerWidget {
         }
 
         return ScaffoldWidget(
-          appBar: AppBar(
-            title: const Text('Kalshi logo here'),
-          ),
+          backgroundColor: Colors.white,
           body: loadingWidget ??
               Form(
                 key: _formKey,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ///TODO: improve UI doing transaction between textformfields
-                    ///when user click in "done"
-                    MoneyTextFormField(
-                      autofocus: true,
-                      controller: annualIncomingController,
-                      validator: _validateInput,
+                    const PageHeaderDescription(
+                      text: '''Let's find out your ''',
+                      boldText: 'financial wellness score.',
                     ),
-                    MoneyTextFormField(
-                      controller: monthlyCostsIncomingController,
-                      validator: _validateInput,
+                    const SizedBox(height: 24),
+                    Card(
+                      color: Colors.white,
+                      elevation: 4,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _Description(),
+                            const SizedBox(height: 16),
+
+                            ///TODO: improve UI doing transaction between textformfields
+                            ///when user click in "done"
+                            const Text('Annual income'),
+                            const SizedBox(height: 7),
+                            MoneyTextFormField(
+                              autofocus: true,
+                              controller: annualIncomingController,
+                              validator: _validateInput,
+                            ),
+                            const SizedBox(height: 16),
+                            const Text('Monthly Costs'),
+                            const SizedBox(height: 7),
+                            MoneyTextFormField(
+                              controller: monthlyCostsIncomingController,
+                              validator: _validateInput,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
+                    const SizedBox(height: 16),
                     Button(
                       enabled: isFormValid.value,
                       onPressed: () {
@@ -66,6 +91,8 @@ class HomePage extends HookConsumerWidget {
                       },
                       child: const Text('Continue'),
                     ),
+                    const SizedBox(height: 36),
+                    const EncryptionDisclaimer(),
                   ],
                 ),
               ),
@@ -124,6 +151,44 @@ class HomePage extends HookConsumerWidget {
     }
 
     return null;
+  }
+}
+
+class _Description extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/circular-logo.png',
+              package: 'design_system',
+              height: 48,
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Financial wellness test',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: Color.fromRGBO(30, 42, 50, 1),
+              ),
+            ),
+            const Text(
+              'Enter your financial information below',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: Color.fromRGBO(112, 135, 151, 1),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

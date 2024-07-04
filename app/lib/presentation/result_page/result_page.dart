@@ -23,9 +23,6 @@ class ResultPage extends HookConsumerWidget {
         }
 
         return ScaffoldWidget(
-          appBar: AppBar(
-            title: const Text('Kalshi logo here'),
-          ),
           body: loadingWidget ?? const Text('result page opened'),
         );
       },

@@ -7,16 +7,17 @@ import '../presentation.dart';
 import 'home_page_state.dart';
 
 final homePageViewModel =
-    StateNotifierProvider.autoDispose<IHomePageViewModel, IHomePageState>(
+    StateNotifierProvider.autoDispose<IHomePageViewModel, HomePageState>(
   (ref) => HomePageViewModel(
     calculateScore: ref.read(calculateScore),
   ),
 );
 
-abstract class IHomePageViewModel extends ViewModel<IHomePageState> {
+abstract class IHomePageViewModel extends ViewModel<HomePageState> {
   IHomePageViewModel(super.state);
 
   abstract final CalculateScore calculateScore;
+  void clearResult();
 
   Future<void> getScore({
     required String annualIncome,
@@ -30,7 +31,7 @@ class HomePageViewModel extends IHomePageViewModel {
 
   HomePageViewModel({
     required this.calculateScore,
-  }) : super(HomePageState.initial());
+  }) : super(HomePageStateImpl.initial());
 
   @override
   Future<void> getScore({
@@ -39,6 +40,7 @@ class HomePageViewModel extends IHomePageViewModel {
   }) async {
     state = state.copyWith(isLoading: true);
 
+    await Future.delayed(const Duration(seconds: 1));
     final result = calculateScore(
       FinancialData(
         annualIncome: annualIncome.asNum,
@@ -50,5 +52,10 @@ class HomePageViewModel extends IHomePageViewModel {
       isLoading: false,
       result: result,
     );
+  }
+
+  @override
+  void clearResult() {
+    state = HomePageStateImpl.initial();
   }
 }

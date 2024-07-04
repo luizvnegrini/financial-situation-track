@@ -2,28 +2,28 @@ import 'package:financial_situation_track/domain/entities/score_result.dart';
 
 import '../base/viewmodel.dart';
 
-abstract class IHomePageState extends ViewModelState {
-  const IHomePageState();
+abstract class HomePageState extends ViewModelState {
+  const HomePageState();
 
   abstract final bool isLoading;
   abstract final String errorMessage;
   abstract final ScoreResult? result;
 
-  IHomePageState copyWith({
+  HomePageState copyWith({
     bool? isLoading,
     String? errorMessage,
     ScoreResult? result,
   });
 }
 
-class HomePageState extends IHomePageState {
-  const HomePageState({
+class HomePageStateImpl extends HomePageState {
+  const HomePageStateImpl({
     this.isLoading = false,
     this.errorMessage = '',
     this.result,
   });
 
-  factory HomePageState.initial() => const HomePageState();
+  factory HomePageStateImpl.initial() => const HomePageStateImpl();
 
   @override
   final bool isLoading;
@@ -36,15 +36,16 @@ class HomePageState extends IHomePageState {
   List<Object?> get props => [
         isLoading,
         errorMessage,
+        result,
       ];
 
   @override
-  IHomePageState copyWith({
+  HomePageState copyWith({
     isLoading,
     errorMessage,
     result,
   }) =>
-      HomePageState(
+      HomePageStateImpl(
         isLoading: isLoading ?? this.isLoading,
         errorMessage: errorMessage ?? this.errorMessage,
         result: result ?? this.result,

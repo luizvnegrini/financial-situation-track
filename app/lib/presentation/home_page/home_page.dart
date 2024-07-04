@@ -1,10 +1,10 @@
 import 'package:design_system/design_system.dart';
 import 'package:external_dependencies/external_dependencies.dart';
+import 'package:financial_situation_track/presentation/home_page/home_page_state.dart';
 import 'package:financial_situation_track/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/core.dart';
-import '../../domain/domain.dart';
 import 'home_page_providers.dart';
 
 class HomePage extends HookConsumerWidget {
@@ -14,15 +14,21 @@ class HomePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return HookConsumer(
-      builder: (_, ref, __) {
-        Widget? loadingWidget;
-        final vm = readHomeViewModel(ref);
-        final annualIncomingController = useTextEditingController();
-        final monthlyCostsIncomingController = useTextEditingController();
-        final state = useHomeState(ref);
-        final isFormValid = useState(false);
+    Widget? loadingWidget;
+    final annualIncomingController = useTextEditingController();
+    final monthlyCostsIncomingController = useTextEditingController();
+    final isFormValid = useState(false);
 
+    return HookConsumer(
+      builder: (contxt, ref, __) {
+        final vm = readHomeViewModel(ref);
+        final state = useHomeState(ref);
+
+        _verifyResultAndNavigate(context, state, () {
+          vm.clearResult();
+          annualIncomingController.clear();
+          monthlyCostsIncomingController.clear();
+        });
         _configureValidatorsListeners(
           annualIncomingController,
           monthlyCostsIncomingController,
@@ -57,9 +63,6 @@ class HomePage extends HookConsumerWidget {
                           children: [
                             _Description(),
                             const SizedBox(height: 16),
-
-                            ///TODO: improve UI doing transaction between textformfields
-                            ///when user click in "done"
                             const Text('Annual income'),
                             const SizedBox(height: 7),
                             MoneyTextFormField(
@@ -83,18 +86,10 @@ class HomePage extends HookConsumerWidget {
                       enabled: isFormValid.value,
                       onPressed: () {
                         if (_formKey.currentState?.validate() == true) {
-                          vm
-                              .getScore(
-                                annualIncome: annualIncomingController.text,
-                                monthlyCosts:
-                                    monthlyCostsIncomingController.text,
-                              )
-                              .then(
-                                (_) => _verifyResultAndNavigate(
-                                  context,
-                                  state.result,
-                                ),
-                              );
+                          vm.getScore(
+                            annualIncome: annualIncomingController.text,
+                            monthlyCosts: monthlyCostsIncomingController.text,
+                          );
                         }
                       },
                       child: const Text('Continue'),
@@ -109,12 +104,20 @@ class HomePage extends HookConsumerWidget {
     );
   }
 
-  void _verifyResultAndNavigate(BuildContext context, ScoreResult? result) {
-    if (result != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        context.go(Routes.result, extra: result);
-      });
-    }
+  void _verifyResultAndNavigate(
+    BuildContext context,
+    HomePageState state,
+    VoidCallback onNavigate,
+  ) {
+    useEffect(() {
+      if (state.result != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          context.go('/${Routes.result}', extra: state.result);
+          onNavigate();
+        });
+      }
+      return;
+    }, [state.result]);
   }
 
   void _configureValidatorsListeners(

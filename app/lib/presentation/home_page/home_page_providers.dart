@@ -10,4 +10,4 @@ IHomePageViewModel readHomeViewModel(WidgetRef ref) =>
     ref.read(homePageViewModel.notifier);
 
 //states
-IHomePageState useHomeState(WidgetRef ref) => ref.watch(homePageViewModel);
+HomePageState useHomeState(WidgetRef ref) => ref.watch(homePageViewModel);

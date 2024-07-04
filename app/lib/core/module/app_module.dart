@@ -6,7 +6,7 @@ import '../../presentation/presentation.dart';
 class Routes {
   static String get _source => '/';
   static String get home => _source;
-  static String get result => '/result';
+  static String get result => 'result';
 }
 
 class AppModule {
@@ -15,14 +15,16 @@ class AppModule {
           name: 'home',
           path: Routes.home,
           builder: (context, state) => HomePage(),
-        ),
-        GoRoute(
-          name: 'result',
-          path: Routes.result,
-          builder: (context, state) {
-            final result = state.extra as ScoreResult;
-            return ResultPage(result: result);
-          },
+          routes: [
+            GoRoute(
+              name: 'result',
+              path: Routes.result,
+              builder: (context, state) {
+                final result = state.extra as ScoreResult;
+                return ResultPage(result: result);
+              },
+            ),
+          ],
         ),
       ];
 }

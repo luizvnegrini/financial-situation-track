@@ -90,6 +90,8 @@ class _Card extends StatelessWidget {
               Text(
                 uiModel.title,
                 style: const TextStyle(
+                  fontFamily: 'Rubik',
+                  package: 'design_system',
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
                 ),
@@ -100,6 +102,10 @@ class _Card extends StatelessWidget {
                 text: TextSpan(
                   text: 'Your financial wellness score is \n',
                   style: const TextStyle(
+                    fontFamily: 'Work Sans',
+                    package: 'design_system',
+                    fontSize: kSpacingXXXS,
+                    fontWeight: FontWeight.w400,
                     color: resultLabelColor,
                   ),
                   children: <TextSpan>[
@@ -118,7 +124,7 @@ class _Card extends StatelessWidget {
               Button.light(
                 onPressed: context.pop,
                 enabled: true,
-                child: const Text('Return'),
+                label: 'Return',
               ),
             ],
           ),

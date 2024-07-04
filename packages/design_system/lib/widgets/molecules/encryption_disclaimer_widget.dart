@@ -9,26 +9,31 @@ class EncryptionDisclaimer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Center(
-          child: Image.asset(
-            'assets/images/lock.png',
-            package: 'design_system',
-            height: 24,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kSpacingNano),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Image.asset(
+              'assets/images/lock.png',
+              package: 'design_system',
+              height: 24,
+            ),
           ),
-        ),
-        const VGap.xxxs(),
-        const Text(
-          '''Your financial information is encrypted and secure. We'll never share or sell any of your personal data.''',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 12,
-            color: Color.fromRGBO(112, 135, 151, 1),
+          const VGap.xxxs(),
+          const Text(
+            '''Your financial information is encrypted and secure. We'll never share or sell any of your personal data.''',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: 'Work Sans',
+              package: 'design_system',
+              fontSize: 12,
+              color: Color.fromRGBO(112, 135, 151, 1),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

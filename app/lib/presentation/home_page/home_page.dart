@@ -12,6 +12,10 @@ class HomePage extends HookConsumerWidget {
   HomePage({super.key});
 
   final _formKey = GlobalKey<FormState>();
+  final TextStyle labelStyle = const TextStyle(
+    fontFamily: 'Work Sans',
+    package: 'design_system',
+  );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -66,9 +70,12 @@ class HomePage extends HookConsumerWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              _Description(),
+                              _Description(style: labelStyle),
                               const VGap.xxxs(),
-                              const Text('Annual income'),
+                              Text(
+                                'Annual income',
+                                style: labelStyle.copyWith(fontSize: 12),
+                              ),
                               const VGap.nano(),
                               MoneyTextFormField(
                                 focusNode: annualIncomingFocusNode,
@@ -82,7 +89,10 @@ class HomePage extends HookConsumerWidget {
                                 validator: _validateInput,
                               ),
                               const VGap.xxxs(),
-                              const Text('Monthly Costs'),
+                              Text(
+                                'Monthly Costs',
+                                style: labelStyle.copyWith(fontSize: 12),
+                              ),
                               const VGap.nano(),
                               MoneyTextFormField(
                                 focusNode: monthlyCostsIncomingFocusNode,
@@ -106,7 +116,7 @@ class HomePage extends HookConsumerWidget {
                           annualIncomingController,
                           monthlyCostsIncomingController,
                         ),
-                        child: const Text('Continue'),
+                        label: 'Continue',
                       ),
                       const VGap.sm(),
                       const EncryptionDisclaimer(),
@@ -193,6 +203,10 @@ class HomePage extends HookConsumerWidget {
 }
 
 class _Description extends StatelessWidget {
+  final TextStyle? style;
+
+  const _Description({this.style});
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -207,20 +221,25 @@ class _Description extends StatelessWidget {
               height: 48,
             ),
             const VGap.xxxs(),
-            const Text(
+            Text(
               'Financial wellness test',
-              style: TextStyle(
+              style: style?.copyWith(
                 fontSize: 20,
-                fontWeight: FontWeight.w500,
-                color: Color.fromRGBO(30, 42, 50, 1),
+                fontWeight: FontWeight.bold,
+                color: const Color.fromRGBO(30, 42, 50, 1),
               ),
             ),
-            const Text(
+            Text(
               'Enter your financial information below',
-              style: TextStyle(
+              style: style?.copyWith(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
-                color: Color.fromRGBO(112, 135, 151, 1),
+                color: const Color.fromRGBO(
+                  112,
+                  135,
+                  151,
+                  1,
+                ),
               ),
             ),
           ],

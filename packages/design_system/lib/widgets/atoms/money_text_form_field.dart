@@ -1,3 +1,4 @@
+import 'package:design_system/design_system.dart';
 import 'package:design_system/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,7 +21,9 @@ class MoneyTextFormField extends StatelessWidget {
 
   final _textStyle = const TextStyle(
     color: Color.fromRGBO(77, 100, 117, 1),
-    fontSize: 24,
+    fontFamily: 'Rubik',
+    package: 'design_system',
+    fontSize: 32,
     fontWeight: FontWeight.w500,
   );
 
@@ -42,6 +45,7 @@ class MoneyTextFormField extends StatelessWidget {
         keyboardType: TextInputType.number,
         textInputAction: TextInputAction.next,
         controller: controller,
+        textAlignVertical: TextAlignVertical.center,
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,
           CurrencyInputFormatter(),
@@ -54,6 +58,7 @@ class MoneyTextFormField extends StatelessWidget {
           errorBorder: _defaultBorder,
           hintStyle: _textStyle,
           hintText: '00,00',
+          contentPadding: const EdgeInsets.symmetric(vertical: kSpacingQuarck),
           prefixIcon: Image.asset(
             'assets/images/dollar-sign.png',
             package: 'design_system',

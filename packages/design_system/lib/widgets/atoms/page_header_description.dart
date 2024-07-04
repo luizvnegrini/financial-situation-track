@@ -20,6 +20,8 @@ class PageHeaderDescription extends StatelessWidget {
         text: TextSpan(
           text: text,
           style: TextStyle(
+            fontFamily: 'Rubik',
+            package: 'design_system',
             color: textColor,
             fontSize: 18,
           ),
@@ -27,7 +29,7 @@ class PageHeaderDescription extends StatelessWidget {
             TextSpan(
               text: boldText,
               style: TextStyle(
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
                 color: textColor,
               ),
             ),

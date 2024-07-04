@@ -5,13 +5,13 @@ import '../../design_system.dart';
 class Button extends StatelessWidget {
   final VoidCallback onPressed;
   final bool enabled;
-  final Widget child;
+  final String label;
   final ButtonStyle buttonStyle;
 
   Button({
     required this.onPressed,
     required this.enabled,
-    required this.child,
+    required this.label,
     super.key,
   }) : buttonStyle = ButtonStyle(
           elevation: const WidgetStatePropertyAll(0),
@@ -24,18 +24,12 @@ class Button extends StatelessWidget {
             },
           ),
           foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
-          textStyle: const WidgetStatePropertyAll<TextStyle>(
-            TextStyle(
-              fontSize: kSpacingXXXS,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
         );
 
   Button.light({
     required this.onPressed,
     required this.enabled,
-    required this.child,
+    required this.label,
     super.key,
   }) : buttonStyle = ButtonStyle(
           backgroundColor: WidgetStateProperty.resolveWith<Color>(
@@ -61,12 +55,6 @@ class Button extends StatelessWidget {
               width: 2,
             ),
           ),
-          textStyle: const WidgetStatePropertyAll<TextStyle>(
-            TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
         );
 
   @override
@@ -77,7 +65,15 @@ class Button extends StatelessWidget {
       child: ElevatedButton(
         onPressed: enabled ? onPressed : null,
         style: buttonStyle,
-        child: child,
+        child: Text(
+          label,
+          style: const TextStyle(
+            fontFamily: 'Work Sans',
+            package: 'design_system',
+            fontSize: kSpacingXXXS,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
     );
   }

@@ -22,11 +22,13 @@ flutter:
   assets:
     - assets/images/
   fonts:
-    - family: MyCustomFont
+    - family: Rubik
       fonts:
         - asset: assets/fonts/Rubik-Medium.ttf
           weight: 500
         - asset: assets/fonts/Rubik-Regular.ttf
+    - family: Work Sans
+      fonts:
         - asset: assets/fonts/WorkSans-Medium.ttf
           weight: 500
         - asset: assets/fonts/WorkSans-Regular.ttf

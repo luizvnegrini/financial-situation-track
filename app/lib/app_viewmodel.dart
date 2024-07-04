@@ -22,7 +22,7 @@ class AppViewModel extends IAppViewModel {
     _hasRequestedLoading = true;
 
     final splashMinDuration = Future<dynamic>.delayed(
-      const Duration(seconds: 1),
+      const Duration(seconds: 3),
     );
 
     final futureResults = await Future.wait<dynamic>([

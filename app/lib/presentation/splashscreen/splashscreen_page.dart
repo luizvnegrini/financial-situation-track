@@ -20,7 +20,7 @@ class SplashScreenPage extends HookConsumerWidget {
             ),
             const VGap.sm(),
             const Text(
-              'Disocover your financial situation now',
+              'Discover your financial situation now',
               style: TextStyle(
                 fontFamily: 'Rubik',
                 package: 'design_system',

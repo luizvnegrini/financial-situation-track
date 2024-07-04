@@ -19,6 +19,11 @@ class MoneyTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final defaultErrorBorder = OutlineInputBorder(
+      borderSide: const BorderSide(color: Colors.red, width: 1.0),
+      borderRadius:
+          BorderRadius.circular(4.0), // Ajuste o raio conforme necessário
+    );
     final defaultBorder = OutlineInputBorder(
       borderSide: BorderSide(
         color: context.colors.border,
@@ -33,7 +38,6 @@ class MoneyTextFormField extends StatelessWidget {
     );
 
     return SizedBox(
-      height: 56,
       child: TextFormField(
         focusNode: focusNode,
         onFieldSubmitted: onFieldSubmitted,
@@ -51,9 +55,10 @@ class MoneyTextFormField extends StatelessWidget {
         decoration: InputDecoration(
           focusedBorder: defaultBorder,
           enabledBorder: defaultBorder,
-          errorBorder: defaultBorder,
+          focusedErrorBorder: defaultErrorBorder,
+          errorBorder: defaultErrorBorder,
           hintStyle: textStyle,
-          hintText: '00,00',
+          hintText: '0.00',
           contentPadding: const EdgeInsets.symmetric(vertical: kSpacingQuarck),
           prefixIcon: Image.asset(
             'assets/images/dollar-sign.png',

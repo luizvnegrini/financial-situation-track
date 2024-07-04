@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../domain/domain.dart';
 import 'result_page_providers.dart';
+import 'result_page_ui_model.dart';
 
 class ResultPage extends HookConsumerWidget {
   final ScoreResult result;
@@ -12,9 +13,7 @@ class ResultPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     useResultState(ref, result);
-
-    const resultLabel = 'Healthy';
-    const resultLabelColor = Color.fromRGBO(77, 100, 117, 1);
+    final uiModel = ResultPageUiModel.getUiData(result);
 
     return ScaffoldWidget(
       backgroundColor: const Color.fromRGBO(244, 248, 250, 1),
@@ -27,62 +26,103 @@ class ResultPage extends HookConsumerWidget {
             boldText: 'final wellness score.',
           ),
           const SizedBox(height: 24),
-          SizedBox(
-            width: double.infinity,
-            child: Card(
-              elevation: 5,
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    Image.asset(
-                      'assets/images/circular-logo.png',
-                      package: 'design_system',
-                      height: 48,
-                    ),
-                    const SizedBox(height: 24),
-                    const Text(
-                      'Congratulations!',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+          _Card(uiModel: uiModel),
+          const SizedBox(height: 36),
+          const EncryptionDisclaimer(),
+        ],
+      ),
+    );
+  }
+}
+
+class _Card extends StatelessWidget {
+  final UIData uiModel;
+
+  const _Card({required this.uiModel});
+
+  @override
+  Widget build(BuildContext context) {
+    const resultLabelColor = Color.fromRGBO(77, 100, 117, 1);
+    const defaultProgressBarItemColor = Color.fromRGBO(244, 248, 250, 1);
+    const defaultDuration = Duration(milliseconds: 600);
+    const defaultDelay = Duration(milliseconds: 160);
+
+    return SizedBox(
+      width: double.infinity,
+      child: Card(
+        elevation: 5,
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Image.asset(
+                'assets/images/circular-logo.png',
+                package: 'design_system',
+                height: 48,
+              ),
+              const SizedBox(height: 24),
+              ProgressBar(
+                color: uiModel.progressBarColor,
+                progressBarItems: [
+                  AnimatedProgressBarItem(
+                    color: uiModel.progressBarColor,
+                    duration: defaultDuration,
+                  ),
+                  AnimatedProgressBarItem(
+                    color: uiModel.result == ScoreResult.healthy ||
+                            uiModel.result == ScoreResult.average
+                        ? uiModel.progressBarColor
+                        : defaultProgressBarItemColor,
+                    duration: defaultDuration,
+                    delay: defaultDelay,
+                  ),
+                  AnimatedProgressBarItem(
+                    color: uiModel.result == ScoreResult.healthy
+                        ? uiModel.progressBarColor
+                        : defaultProgressBarItemColor,
+                    duration: defaultDuration,
+                    delay: defaultDelay + defaultDelay,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 24),
+              Text(
+                uiModel.title,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(height: 4),
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: 'Your financial wellness score is \n',
+                  style: const TextStyle(
+                    color: resultLabelColor,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: uiModel.resultLabel,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: resultLabelColor,
+                        height: 2,
                       ),
-                    ),
-                    const SizedBox(height: 4),
-                    RichText(
-                      textAlign: TextAlign.center,
-                      text: const TextSpan(
-                        text: 'Your financial wellness score is \n',
-                        style: TextStyle(
-                          color: resultLabelColor,
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: '$resultLabel.',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: resultLabelColor,
-                              height: 2,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 32),
-                    Button.light(
-                      onPressed: context.pop,
-                      enabled: true,
-                      child: const Text('Return'),
                     ),
                   ],
                 ),
               ),
-            ),
+              const SizedBox(height: 32),
+              Button.light(
+                onPressed: context.pop,
+                enabled: true,
+                child: const Text('Return'),
+              ),
+            ],
           ),
-          const SizedBox(height: 36),
-          const EncryptionDisclaimer(),
-        ],
+        ),
       ),
     );
   }

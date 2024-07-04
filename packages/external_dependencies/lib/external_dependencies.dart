@@ -1,6 +1,7 @@
 library external_dependencies;
 
 export 'package:equatable/equatable.dart';
+export 'package:flutter_animate/flutter_animate.dart';
 export 'package:flutter_hooks/flutter_hooks.dart';
 export 'package:flutter_svg/svg.dart';
 export 'package:go_router/go_router.dart';

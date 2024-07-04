@@ -9,6 +9,7 @@ https://github.com/luizvnegrini/financial-situation-track/assets/44884362/1f6513
 - Flutter
 - Riverpod
 - Flutter Hooks
+- Dartz
 - Mocktail
 
 ## Features
@@ -63,6 +64,17 @@ To maintain organization, each test file must be created in the same folder stru
     /usecases
       /calculate_score_test.dart
 ```
+
+- Test error handling: To see the error handling please go to calculate_score.dart and uncoment line 14, after this just try to execute the operation again.
+```bash
+# Implementation
+/lib
+  /domain
+    /usecases
+      /calculate_score.dart
+```
+
+
 
 ## **4. Design system**
 

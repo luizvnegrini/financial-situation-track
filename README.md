@@ -68,6 +68,8 @@ To maintain organization, each test file must be created in the same folder stru
 
 Project uses Atomic Design for create the Design System. Click [here](https://bradfrost.com/blog/post/atomic-web-design/) to read about Atomic Design.
 
+- ProgressBar: I decide to create an animation for the progress bar to improve the UI/UX.
+
 ## **5. Critique and improvements**
 
 About the project I tried to deliver something robust but there is always more to do, in this case I would like to perform more tests, different types of tests such as "golden tests" and "widget tests" that were not implemented, reevaluate the code and see if any refactoring would be necessary to leave the cleaner code.

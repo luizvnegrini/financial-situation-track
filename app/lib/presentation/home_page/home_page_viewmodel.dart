@@ -48,10 +48,12 @@ class HomePageViewModelImpl extends HomePageViewModel {
       ),
     );
 
-    state = state.copyWith(
-      isLoading: false,
-      result: result,
+    final newState = result.fold(
+      (failure) => state.copyWith(errorMessage: 'Try again later'),
+      (result) => state.copyWith(result: result),
     );
+
+    state = newState.copyWith(isLoading: false);
   }
 
   @override

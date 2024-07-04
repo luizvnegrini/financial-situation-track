@@ -1,5 +1,6 @@
 library external_dependencies;
 
+export 'package:dartz/dartz.dart';
 export 'package:equatable/equatable.dart';
 export 'package:flutter_hooks/flutter_hooks.dart';
 export 'package:flutter_svg/svg.dart';

@@ -49,7 +49,8 @@ void main() {
 
       const scoreResult = ScoreResult.healthy;
 
-      when(() => mockCalculateScore(financialData)).thenReturn(scoreResult);
+      when(() => mockCalculateScore(financialData))
+          .thenReturn(const Right(scoreResult));
 
       await homePageViewModel.getScore(
         annualIncome: '50000',

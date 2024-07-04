@@ -31,6 +31,7 @@ abstract class BaseException extends Equatable implements Exception {
 
 //Can be used in the future features when will request remote data
 enum ExceptionType {
+  unexpected,
   serverError,
   notFound,
   unauthorized,

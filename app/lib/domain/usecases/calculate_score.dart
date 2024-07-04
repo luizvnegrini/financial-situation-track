@@ -1,23 +1,34 @@
+import 'package:external_dependencies/external_dependencies.dart';
+
+import '../../core/core.dart';
 import '../entities/entities.dart';
 
 abstract class CalculateScore {
-  ScoreResult call(FinancialData data);
+  Either<Failure, ScoreResult> call(FinancialData data);
 }
 
 class CalculateScoreImpl implements CalculateScore {
   @override
-  ScoreResult call(FinancialData data) {
-    ///TODO: put inside try catch block and handle possible error's
-    final annualNetIncome = data.annualIncome - (data.annualIncome * 0.08);
-    final double annualCosts = data.monthlyCosts * 12;
-    final costPercentage = annualCosts / annualNetIncome;
+  Either<Failure, ScoreResult> call(FinancialData data) {
+    try {
+      throw Exception();
 
-    if (costPercentage <= 0.25) {
-      return ScoreResult.healthy;
-    } else if (costPercentage <= 0.75) {
-      return ScoreResult.average;
-    } else {
-      return ScoreResult.unhealthy;
+      late ScoreResult result;
+      final annualNetIncome = data.annualIncome - (data.annualIncome * 0.08);
+      final double annualCosts = data.monthlyCosts * 12;
+      final costPercentage = annualCosts / annualNetIncome;
+
+      if (costPercentage <= 0.25) {
+        result = ScoreResult.healthy;
+      } else if (costPercentage <= 0.75) {
+        result = ScoreResult.average;
+      } else {
+        result = ScoreResult.unhealthy;
+      }
+
+      return Right(result);
+    } catch (e) {
+      return Left(Failure(type: ExceptionType.unexpected));
     }
   }
 }

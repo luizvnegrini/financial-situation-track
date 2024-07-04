@@ -31,10 +31,17 @@ class HomePage extends HookConsumerWidget {
     );
 
     return HookConsumer(
-      builder: (contxt, ref, __) {
+      builder: (context, ref, __) {
         final vm = readHomeViewModel(ref);
         final state = useHomeState(ref);
 
+        if (state.errorMessage.isNotEmpty) {
+          _handleError(
+            context,
+            ref,
+            state.errorMessage,
+          );
+        }
         _verifyResultAndNavigate(context, state, () {
           vm.clearResult();
           annualIncomingController.clear();
@@ -123,6 +130,23 @@ class HomePage extends HookConsumerWidget {
                   ),
                 ),
               ),
+        );
+      },
+    );
+  }
+
+  void _handleError(BuildContext context, WidgetRef ref, String message) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        final scaffoldMessenger = useScaffoldMessenger(ref);
+        scaffoldMessenger.currentState?.showSnackBar(
+          SnackBar(
+            backgroundColor: context.colors.unhealthy,
+            padding: const EdgeInsets.symmetric(horizontal: kSpacingXXS),
+            showCloseIcon: true,
+            content: Text(message),
+            duration: const Duration(seconds: 2), // Duração da Snackbar
+          ),
         );
       },
     );

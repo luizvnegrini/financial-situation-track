@@ -22,7 +22,7 @@ class ProgressBarState extends State<ProgressBar>
 
   @override
   Widget build(BuildContext context) {
-    final containerWidth = MediaQuery.of(context).size.width;
+    final containerWidth = MediaQuery.of(context).size.width * 0.97;
     final List<Positioned> children = [];
     widget.progressBarItems.asMap().forEach((index, item) {
       double left = index == 0 ? 0 : (containerWidth / 3.8) * index;

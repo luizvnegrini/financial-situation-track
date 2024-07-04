@@ -7,7 +7,6 @@ class MoneyTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final FormFieldValidator<String>? validator;
   final FocusNode? focusNode;
-  final bool autofocus;
   final Function(String?)? onFieldSubmitted;
 
   const MoneyTextFormField({
@@ -15,7 +14,6 @@ class MoneyTextFormField extends StatelessWidget {
     required this.controller,
     this.onFieldSubmitted,
     this.focusNode,
-    this.autofocus = false,
     this.validator,
   });
 
@@ -38,7 +36,6 @@ class MoneyTextFormField extends StatelessWidget {
     return SizedBox(
       height: 56,
       child: TextFormField(
-        autofocus: autofocus,
         focusNode: focusNode,
         onFieldSubmitted: onFieldSubmitted,
         autovalidateMode: AutovalidateMode.onUserInteraction,

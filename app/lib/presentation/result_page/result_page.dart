@@ -17,19 +17,22 @@ class ResultPage extends HookConsumerWidget {
 
     return ScaffoldWidget(
       backgroundColor: const Color.fromRGBO(244, 248, 250, 1),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const VGap.xxxs(),
-          const PageHeaderDescription(
-            text: '''Here's your final ''',
-            boldText: 'final wellness score.',
-          ),
-          const VGap.xxs(),
-          _Card(uiModel: uiModel),
-          const VGap.sm(),
-          const EncryptionDisclaimer(),
-        ],
+      body: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const VGap.xxxs(),
+            const PageHeaderDescription(
+              text: '''Here's your final ''',
+              boldText: 'final wellness score.',
+            ),
+            const VGap.xxs(),
+            _Card(uiModel: uiModel),
+            const VGap.sm(),
+            const EncryptionDisclaimer(),
+          ],
+        ),
       ),
     );
   }

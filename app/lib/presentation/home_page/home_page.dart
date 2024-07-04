@@ -22,9 +22,13 @@ class HomePage extends HookConsumerWidget {
     Widget? loadingWidget;
     final annualIncomingController = useTextEditingController();
     final monthlyCostsIncomingController = useTextEditingController();
-    final annualIncomingFocusNode = useFocusNode();
     final monthlyCostsIncomingFocusNode = useFocusNode();
     final isFormValid = useState(false);
+    _configureValidatorsListeners(
+      annualIncomingController,
+      monthlyCostsIncomingController,
+      isFormValid,
+    );
 
     return HookConsumer(
       builder: (contxt, ref, __) {
@@ -36,11 +40,6 @@ class HomePage extends HookConsumerWidget {
           annualIncomingController.clear();
           monthlyCostsIncomingController.clear();
         });
-        _configureValidatorsListeners(
-          annualIncomingController,
-          monthlyCostsIncomingController,
-          isFormValid,
-        );
 
         if (state.isLoading) {
           loadingWidget = const Center(child: CircularProgressIndicator());
@@ -48,10 +47,10 @@ class HomePage extends HookConsumerWidget {
 
         return ScaffoldWidget(
           backgroundColor: Colors.white,
-          body: SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
-            child: loadingWidget ??
-                Form(
+          body: loadingWidget ??
+              SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
+                child: Form(
                   key: _formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,8 +77,6 @@ class HomePage extends HookConsumerWidget {
                               ),
                               const VGap.nano(),
                               MoneyTextFormField(
-                                focusNode: annualIncomingFocusNode,
-                                autofocus: true,
                                 controller: annualIncomingController,
                                 onFieldSubmitted: (_) {
                                   FocusScope.of(context).requestFocus(
@@ -111,11 +108,13 @@ class HomePage extends HookConsumerWidget {
                       const VGap.xxxs(),
                       Button(
                         enabled: isFormValid.value,
-                        onPressed: () => _validateForm(
-                          vm,
-                          annualIncomingController,
-                          monthlyCostsIncomingController,
-                        ),
+                        onPressed: () {
+                          _validateForm(
+                            vm,
+                            annualIncomingController,
+                            monthlyCostsIncomingController,
+                          );
+                        },
                         label: 'Continue',
                       ),
                       const VGap.sm(),
@@ -123,7 +122,7 @@ class HomePage extends HookConsumerWidget {
                     ],
                   ),
                 ),
-          ),
+              ),
         );
       },
     );
